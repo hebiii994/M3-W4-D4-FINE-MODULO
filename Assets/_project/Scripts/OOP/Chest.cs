@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Chest : MonoBehaviour
 {
-    [SerializeField] private Pickup _pickupToSpawn;
-    [SerializeField] private Transform _spawnPoint;
+    [SerializeField] private Pickup[] _pickupToSpawn;
+    [SerializeField] private Transform[] _spawnPoint;
     [SerializeField] private AudioClip _openSound;
 
     private Animator _animator;
@@ -42,9 +42,16 @@ public class Chest : MonoBehaviour
             _audioSource.PlayOneShot(_openSound);
         }
 
-        if (_pickupToSpawn != null && _spawnPoint != null)
+        if (_pickupToSpawn != null && _pickupToSpawn.Length > 0 && _spawnPoint != null && _spawnPoint.Length > 0)
         {
-            Instantiate(_pickupToSpawn, _spawnPoint.position, _spawnPoint.rotation);
+            int itemsToSpawn = Mathf.Min(_pickupToSpawn.Length, _spawnPoint.Length);
+            for (int i = 0; i < itemsToSpawn; i++)
+            {
+                Pickup pickupPrefab = _pickupToSpawn[i];
+                Transform spawnTransform = _spawnPoint[i];
+                Instantiate(pickupPrefab, spawnTransform.position, spawnTransform.rotation);
+            }
+            
         }
         else
         {

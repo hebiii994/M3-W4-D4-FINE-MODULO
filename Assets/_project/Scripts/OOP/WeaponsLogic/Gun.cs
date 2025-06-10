@@ -8,7 +8,8 @@ public class Gun : Weapon
     [SerializeField] private Projectile _bulletPrefab; 
     [SerializeField] private Transform _firePoint;
     [SerializeField] private AudioClip _shootSound;
-
+    
+    private Animator _animatorGun;
     private Transform _targetEnemy;
     private AudioSource _audioSource;
 
@@ -16,6 +17,7 @@ public class Gun : Weapon
     {
         base.Awake();
         _audioSource = GetComponent<AudioSource>();
+        _animatorGun = GetComponent<Animator>();
     }
     protected override bool CanAttack()
     {
@@ -50,6 +52,11 @@ public class Gun : Weapon
         if (_audioSource != null && _shootSound != null)
         {
             _audioSource.PlayOneShot(_shootSound);
+        }
+
+        if (_animatorGun != null)
+        {
+            _animatorGun.SetTrigger("Fire");
         }
 
         Vector2 directionToEnemy = (_targetEnemy.position - _firePoint.position).normalized;

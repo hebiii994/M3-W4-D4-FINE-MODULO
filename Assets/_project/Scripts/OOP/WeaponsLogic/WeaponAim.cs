@@ -20,7 +20,7 @@ public class WeaponAim : MonoBehaviour
         float moveX = _playerAnimator.GetFloat("moveX");
 
         //tutto normale verso destra
-        if (moveX > 0.1f)
+        if (moveX > -0.1f)
         {
             transform.localScale = _initialLocalScale;
         }

@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] private float _speed = 2.5f;
     [SerializeField] private float _stoppingDistance = 1f;
+    [SerializeField] private float _touchDamage = 10f;
 
     private Rigidbody2D _rb;
     private Transform _playerTarget;
@@ -59,13 +60,21 @@ public class Enemy : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        
+
+ 
         if (collision.gameObject.CompareTag("Player"))
         {
-            
-            Destroy(gameObject);
 
-           
+            LifeController playerLife = collision.gameObject.GetComponent<LifeController>();
+            if (playerLife != null)
+            {
+                playerLife.TakeDamage(_touchDamage);
+            }
+
+
+            Destroy(gameObject);
         }
+
+        
     }
 }

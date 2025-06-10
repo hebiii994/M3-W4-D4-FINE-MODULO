@@ -1,12 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LifeController : MonoBehaviour
 {
+
+
+
     [SerializeField] private float _maxHealth = 30f;
     [SerializeField] private AudioClip _hitSound;
     [SerializeField] private AudioClip _deathSound;
+    [SerializeField] private bool _isPlayer = false;
 
     //con la properties la leggiamo soltanto
     private float _currentHealth;
@@ -14,10 +19,9 @@ public class LifeController : MonoBehaviour
 
     private AudioSource _audioSource;
 
-
-   
-    void Start()
+    private void Awake()
     {
+        _audioSource = GetComponent<AudioSource>();
         _currentHealth = _maxHealth;
     }
 
@@ -33,6 +37,7 @@ public class LifeController : MonoBehaviour
             _audioSource.PlayOneShot(_hitSound);
         }
 
+
         if (_currentHealth <= 0)
         {
             
@@ -44,14 +49,22 @@ public class LifeController : MonoBehaviour
 
     private void Die()
     {
-        Debug.Log(gameObject.name + " è stato sconfitto.");
-
-        // PlayClipAtPoint mi permette di continuare a sentire il suono anche distruggendo l'oggetto del nemico (dalla posizione di morte in pratica)
-        if (_deathSound != null)
+        if (_isPlayer)
         {
-            AudioSource.PlayClipAtPoint(_deathSound, transform.position);
+            Debug.Log(gameObject.name + " è stato sconfitto.");  
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
+        else
+        {
+            // PlayClipAtPoint mi permette di continuare a sentire il suono anche distruggendo l'oggetto del nemico (dalla posizione di morte in pratica)
+            if (_deathSound != null)
+            {
+                Debug.Log(gameObject.name + " è stato sconfitto.");
+                AudioSource.PlayClipAtPoint(_deathSound, transform.position);
+            }
 
-        Destroy(gameObject);
+            Destroy(gameObject);
+        }
+        
     }
 }

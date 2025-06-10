@@ -5,19 +5,47 @@ using UnityEngine;
 public class Shovel : Weapon
 {
     [SerializeField] private Transform _attackPoint;
-    [SerializeField] private float _attackRadius = 0.8f;
+    //[SerializeField] private float _attackRadius = 0.8f;  <--- al momento non più utilizzata
     [SerializeField] private float _attackDamage = 5f;
     [SerializeField] private AudioClip _swingSound;
 
     private AudioSource _audioSource;
     private Animator _shovelAnimator;
-    
+    private Collider2D _hitboxCollider;
+    private List<Collider2D> _hitEnemiesThisSwing;
+
+    private bool _isAttacking = false;
+    private float _attackTimer = 0f;
+    private float _attackDuration = 0.2f;
+
 
     protected override void Awake()
     {
         base.Awake();
         _audioSource = GetComponent<AudioSource>();
         _shovelAnimator = GetComponent<Animator>();
+        _hitboxCollider = GetComponent<PolygonCollider2D>();
+        _hitboxCollider.enabled = false;
+        _hitEnemiesThisSwing = new List<Collider2D>();
+
+        
+    }
+    protected override void Update()
+    {
+        
+        base.Update();
+
+        
+        if (_isAttacking)
+        {
+            _attackTimer -= Time.deltaTime;
+            if (_attackTimer <= 0f)
+            {
+                
+                _isAttacking = false;
+                _hitboxCollider.enabled = false; 
+            }
+        }
     }
     protected override bool CanAttack()
     {
@@ -47,19 +75,24 @@ public class Shovel : Weapon
             return;
         }
 
-        //stessa logica di ricerca della gun
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(_attackPoint.position, _attackRadius, _enemyLayer);
+        _hitEnemiesThisSwing.Clear();
+        _isAttacking = true;
+        _attackTimer = _attackDuration;
+        _hitboxCollider.enabled = true;
 
-        
-        foreach (Collider2D enemy in hitEnemies)
+    }
+
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (!_hitboxCollider.enabled) return;
+        if (collider.CompareTag("Enemy") && !_hitEnemiesThisSwing.Contains(collider))
+        {
+            _hitEnemiesThisSwing.Add(collider);
+            LifeController enemyLife = collider.GetComponent<LifeController>();
+            if (enemyLife != null)
             {
-                Debug.Log("Pala ha colpito: " + enemy.name);
-                LifeController enemyLife = enemy.GetComponent<LifeController>();
-                if (enemyLife != null)
-                {
-                    enemyLife.TakeDamage(_attackDamage);
-                }
+                enemyLife.TakeDamage(_attackDamage);
             }
-       
+        }
     }
 }

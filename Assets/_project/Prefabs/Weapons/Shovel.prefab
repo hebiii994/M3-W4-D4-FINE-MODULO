@@ -75,6 +75,8 @@ GameObject:
   - component: {fileID: 8655762827562158012}
   - component: {fileID: 626325181938481738}
   - component: {fileID: 1533209977910161655}
+  - component: {fileID: 5003794229060928492}
+  - component: {fileID: 5287005163610835238}
   m_Layer: 0
   m_Name: Shovel
   m_TagString: Untagged
@@ -92,7 +94,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.1, y: 2.1, z: 2.1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 132635421409391319}
@@ -137,8 +139,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1564532975
-  m_SortingLayer: 7
+  m_SortingLayerID: 724052575
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 143021600, guid: 0d5e657ee5a074e4baa53d5b248a01d2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -170,7 +172,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2048
   _attackPoint: {fileID: 132635421409391319}
-  _attackRadius: 1
   _attackDamage: 5
   _swingSound: {fileID: 8300000, guid: 14f24de2a9a70154e96297de25e2184c, type: 3}
 --- !u!82 &626325181938481738
@@ -290,3 +291,90 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!60 &5003794229060928492
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6857937437878255239}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.3, y: 0.6}
+    oldSize: {x: 1.125, y: 0.5625}
+    newSize: {x: 0.375, y: 0.1875}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.37009585, y: 0.12557395}
+      - {x: 0.20465499, y: 0.12635903}
+      - {x: -0.3375, y: 0.119782954}
+      - {x: -0.33421198, y: -0.10399513}
+      - {x: -0.048015997, y: -0.1139141}
+      - {x: 0.39246726, y: -0.11550929}
+      - {x: 0.45817372, y: -0.22779003}
+      - {x: 0.6625546, y: -0.2322833}
+      - {x: 0.67565054, y: -0.21627662}
+      - {x: 0.7408284, y: -0.1368558}
+      - {x: 0.79221743, y: -0.09728281}
+      - {x: 0.7922941, y: 0.09327035}
+      - {x: 0.7301551, y: 0.16436772}
+      - {x: 0.60333014, y: 0.23009767}
+      - {x: 0.4718494, y: 0.22828804}
+  m_UseDelaunayMesh: 0
+--- !u!50 &5287005163610835238
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6857937437878255239}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

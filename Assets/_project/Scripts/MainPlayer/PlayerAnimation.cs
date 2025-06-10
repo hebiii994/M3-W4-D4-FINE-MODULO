@@ -10,7 +10,8 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField] private PlayerController _playerController;
 
     // l'assets che avevo scaricato aveva una idle animazione particolare che ho pensato di usare se il player non si muove per più di 3 secondi
-    [SerializeField] private float inactiveTimeCounter = 0f;
+    private float inactiveTimeCounter = 0f;
+    private Vector2 _lastMoveDirection;
 
     void Awake()
     {
@@ -22,6 +23,7 @@ public class PlayerAnimation : MonoBehaviour
     private void Start()
     {
         //facciamo partire di faccia il player
+        _lastMoveDirection = Vector2.down;
         _animator.SetFloat("moveY", -1f);
         _animator.SetFloat("moveX", 0f);
     }
@@ -39,6 +41,7 @@ public class PlayerAnimation : MonoBehaviour
         if (isMoving)
         {
             // Diciamo all'Animator la nostra ultima direzione di movimento
+            _lastMoveDirection = direction;
             _animator.SetFloat("moveX", direction.x);
             _animator.SetFloat("moveY", direction.y);
 
@@ -48,7 +51,8 @@ public class PlayerAnimation : MonoBehaviour
         }
         else
         {
-            
+            _animator.SetFloat("moveX", _lastMoveDirection.x);
+            _animator.SetFloat("moveY", _lastMoveDirection.y);
             inactiveTimeCounter += Time.deltaTime;
         }
 
