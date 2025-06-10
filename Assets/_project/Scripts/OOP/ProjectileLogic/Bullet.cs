@@ -18,6 +18,15 @@ public class Bullet : Projectile
             }
             Destroy(gameObject);
         }
+        else if (collider.CompareTag("Destructible"))
+        {    
+            LifeController destructibleLife = collider.GetComponent<LifeController>();
+            if (destructibleLife != null)
+            {
+                destructibleLife.TakeDamage(GetDamage());
+            }
+            Destroy(gameObject);
+        }
         else if (collider.CompareTag("Obstacle"))
         {
             Destroy(gameObject);

@@ -7,9 +7,16 @@ public class Gun : Weapon
 
     [SerializeField] private Projectile _bulletPrefab; 
     [SerializeField] private Transform _firePoint;
+    [SerializeField] private AudioClip _shootSound;
 
     private Transform _targetEnemy;
+    private AudioSource _audioSource;
 
+    protected override void Awake()
+    {
+        base.Awake();
+        _audioSource = GetComponent<AudioSource>();
+    }
     protected override bool CanAttack()
     {
         // Physics2D.OverlapCircleAll è perfetto in questo caso visto che ci da una lista di tutti i collider presenti in un area circolare
@@ -39,9 +46,15 @@ public class Gun : Weapon
             Debug.Log("Controllare setup di Gun!");
             return;
         }
+        // aggiunto audio di sparo
+        if (_audioSource != null && _shootSound != null)
+        {
+            _audioSource.PlayOneShot(_shootSound);
+        }
 
         Vector2 directionToEnemy = (_targetEnemy.position - _firePoint.position).normalized;
         Projectile projectileInstance = Instantiate(_bulletPrefab, _firePoint.position, _firePoint.rotation);
         projectileInstance.Shoot(directionToEnemy);
     }
+    
 }

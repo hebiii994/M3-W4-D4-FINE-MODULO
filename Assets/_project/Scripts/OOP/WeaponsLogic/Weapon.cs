@@ -9,15 +9,19 @@ public abstract class Weapon : MonoBehaviour
     [SerializeField] private float _range = 10f;
 
     //l'arma veniva raccolta ed instanziata ma in un punto random non nella mano del player, provo ad aggiungere questa e la corrispettiva properties
-    [SerializeField] private Transform _grip;
-
+    [SerializeField] private Transform _grip; 
     [SerializeField] protected LayerMask _enemyLayer;
 
     private float _nextFireTime = 0f;
-
     protected float Range => _range;
     public Transform Grip => _grip;
+    protected PlayerController _playerController;
 
+
+    protected virtual void Awake()
+    {
+        _playerController = GetComponentInParent<PlayerController>();
+    }
     protected virtual void Update()
     {
         if (Time.time >= _nextFireTime)

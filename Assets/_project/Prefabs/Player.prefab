@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1485453718016516184}
+  - component: {fileID: 3624717184185134344}
   m_Layer: 0
   m_Name: WeaponHand
   m_TagString: Untagged
@@ -31,6 +32,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5400750291390015688}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3624717184185134344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5973453035314341385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2183659ef60682c439ed1b0e92909386, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6114354447051414344
 GameObject:
   m_ObjectHideFlags: 0
@@ -163,6 +176,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 100
+  _hitSound: {fileID: 0}
+  _deathSound: {fileID: 0}
 --- !u!95 &1418863633316089763
 Animator:
   serializedVersion: 5
